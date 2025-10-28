@@ -5,6 +5,7 @@ class WhatsAppService {
   constructor() {
     this.phoneNumberId = config.whatsapp.phoneNumberId;
     this.accessToken = config.whatsapp.accessToken;
+    this.token = config.whatsapp.token;
     this.apiUrl = `https://graph.facebook.com/v18.0/${this.phoneNumberId}/messages`;
     
     console.log('✅ WhatsAppService initialized');
@@ -28,7 +29,7 @@ class WhatsAppService {
 
       const response = await axios.post(this.apiUrl, payload, {
         headers: {
-          'Authorization': `Bearer ${this.accessToken}`,
+          'Authorization': `Bearer ${this.token}`,
           'Content-Type': 'application/json'
         }
       });

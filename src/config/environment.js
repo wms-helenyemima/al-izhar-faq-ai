@@ -5,6 +5,7 @@ export default {
     verifyToken: process.env.WHATSAPP_VERIFY_TOKEN,
     phoneNumberId: process.env.WHATSAPP_PHONE_NUMBER_ID,
     accessToken: process.env.WHATSAPP_ACCESS_TOKEN,
+    token: process.env.WHATSAPP_TOKEN,
   },
   gemini: {
     apiKey: process.env.GEMINI_API_KEY
