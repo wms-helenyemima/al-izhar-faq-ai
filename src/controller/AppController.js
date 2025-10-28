@@ -95,6 +95,50 @@ class AppController {
       }
     }
   };
+
+  // Chat
+  chat = async (req, res) => {
+    try {
+      const body = req.body;
+      const change = body.entry?.[0]?.changes?.[0]?.value;
+
+      const messages = change.messages;
+      const msg = messages[0];
+
+      const phoneNumber = msg.from;
+      const message = msg.text?.body;
+      const timestamp = msg.timestamp;
+      const timeSent = new Date(Number(timestamp) * 1000);
+
+      console.log(`📩 Message from ${phoneNumber}: ${message}`);
+      console.log(`🕐 Sent at: ${timeSent.toISOString()}`);
+
+      const faqResponse = await this.faqService.findAnswer(message);
+
+      if (faqResponse) {
+        console.log(`faqResponse fetched`);
+        return res.json({ success: true, answer: faqResponse });
+      } else {
+        console.log(`⚠️ No answer found for ${phoneNumber}`);
+        return res.json({
+          success: false,
+          answer: 'Maaf, saya belum memiliki informasi mengenai pertanyaan tersebut. Silakan hubungi customer service kami untuk bantuan lebih lanjut.'
+        });
+      }
+    } catch (error) {
+      console.error('❌ Error processing webhook:', error);
+
+      const phoneNumber = req.body.entry?.[0]?.changes?.[0]?.value?.messages?.[0]?.from;
+      if (phoneNumber) {
+        return res.json({
+          success: false,
+          answer: 'Maaf, terjadi kesalahan. Silakan coba lagi nanti atau hubungi customer service kami.'
+        });
+      }
+
+      res.status(500).json({ success: false, error: error.message });
+    }
+  };
 }
 
 export default AppController;

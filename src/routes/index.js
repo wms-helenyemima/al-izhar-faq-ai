@@ -10,5 +10,6 @@ const appController = new AppController(services);
 // WhatsApp webhook routes
 router.get('/whatsapp/webhook', appController.verifyWebhook);
 router.post('/whatsapp/webhook', appController.receiveAndReply);
+router.post('/chat', appController.chat);
 
 export default router;
