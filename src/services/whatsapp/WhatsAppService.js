@@ -15,26 +15,26 @@ class WhatsAppService {
     try {
       console.log(`📤 Sending message to ${to}:`, message);
 
-      // const payload = {
-      //   messaging_product: 'whatsapp',
-      //   recipient_type: 'individual',
-      //   to: to,
-      //   type: 'text',
-      //   text: {
-      //     preview_url: false,
-      //     body: message
-      //   }
-      // };
+      const payload = {
+        messaging_product: 'whatsapp',
+        recipient_type: 'individual',
+        to: to,
+        type: 'text',
+        text: {
+          preview_url: false,
+          body: message
+        }
+      };
 
-      // const response = await axios.post(this.apiUrl, payload, {
-      //   headers: {
-      //     'Authorization': `Bearer ${this.accessToken}`,
-      //     'Content-Type': 'application/json'
-      //   }
-      // });
+      const response = await axios.post(this.apiUrl, payload, {
+        headers: {
+          'Authorization': `Bearer ${this.accessToken}`,
+          'Content-Type': 'application/json'
+        }
+      });
 
-      // console.log('✅ Message sent successfully:', response.data);
-      // return response.data;
+      console.log('✅ Message sent successfully:', response.data);
+      return response.data;
     } catch (error) {
       console.error('❌ Error sending message:', error.response?.data || error.message);
       throw error;
