@@ -1,10 +1,14 @@
 import 'dotenv/config';
 import express from 'express';
+import cors from 'cors';
 import routes from './routes/index.js';
 import errorHandler from './middleware/errorHandler.js';
 import config from './config/environment.js';
 
 const app = express();
+
+// CORS - Allow all origins (or specify your React app's URL)
+app.use(cors());
 
 // Middleware
 app.use(express.json());
