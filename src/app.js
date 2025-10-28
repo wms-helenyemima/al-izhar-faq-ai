@@ -26,6 +26,7 @@ const PORT = config.port;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
   console.log(`📱 WhatsApp webhook ready at /whatsapp/webhook`);
+  console.log(`📱 Manual chat ready at /chat`);
 });
 
 export default app;
